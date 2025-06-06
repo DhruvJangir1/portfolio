@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; /* Changed font */
+        background: linear-gradient(120deg, #e0eafc 60%, #cfdef3 100%); /* Changed background */
+        color: #232946;
+        min-height: 100vh;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #232946;
+        padding: 0.7rem 2rem;
+        color: #fff;
+        border-radius: 16px;
+        margin: 2rem auto 2.5rem auto;
+        box-shadow: 0 4px 24px rgba(35,41,70,0.13);
+        max-width: 900px;
+      }
+      nav div {
+        font-size: 1.7rem;
+        font-weight: bold;
+        letter-spacing: 2.5px;
+        background: linear-gradient(90deg, #ff9966 0%, #fc5c7d 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+      nav ul {
+        list-style: disc inside; /* Show bullets */
+        display: flex;
+        gap: 2.5rem;
+        margin: 0;
+        padding: 0;
+      }
+      nav ul li {
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: color 0.2s;
+        position: relative;
+        letter-spacing: 1px;
+        color: #ffe259; /* Change color of nav items */
+        list-style-type: square; /* Different bullet type */
+      }
+      nav ul li:hover {
+        color: #fc5c7d;
+      }
+      nav ul li::marker {
+        color: #00c3ff; /* Bullet color */
+      }
+      nav ul li::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2.5px;
+        background: linear-gradient(90deg, #ff9966 0%, #fc5c7d 100%);
+        transition: width 0.3s;
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        border-radius: 2px;
+      }
+      nav ul li:hover::after {
+        width: 100%;
+      }
+      @media (max-width: 700px) {
+        nav {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 1.2rem;
+          max-width: 98vw;
+        }
+        nav ul {
+          flex-direction: column;
+          gap: 1.2rem;
+          width: 100%;
+        }
+        nav div {
+          margin-bottom: 0.7rem;
+        }
+      }
+      .container {
+        max-width: 700px;
+        margin: 2rem auto;
+        background: rgba(255,255,255,0.95);
+        border-radius: 18px;
+        box-shadow: 0 6px 32px rgba(252,92,125,0.09), 0 2px 10px rgba(35,41,70,0.06);
+        padding: 2.5rem 2rem 2rem 2rem;
+        backdrop-filter: blur(2px);
+      }
+      h1 {
+        margin-top: 0;
+        font-size: 2.7rem;
+        font-weight: 900;
+        letter-spacing: 2.5px;
+        text-align: center; /* Center main heading */
+        background: linear-gradient(90deg, #ff9966 0%, #fc5c7d 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1.4rem;
+        text-shadow: 0 2px 8px rgba(252,92,125,0.08);
+      }
+      h2 {
+        color: #232946;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 0.7rem;
+        letter-spacing: 1.2px;
+        border-left: 5px solid #fc5c7d;
+        padding-left: 14px;
+        background: #f7f7fa;
+        border-radius: 6px;
+        display: inline-block;
+        box-shadow: 0 1px 4px rgba(252,92,125,0.06);
+      }
+      h2.chemistry {
+        font-size: 2.2rem;
+        color: #ff5e62;
+        background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        border-left: 7px solid #ff5e62;
+        padding-left: 18px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        margin-top: 2.2rem;
+        margin-bottom: 1.2rem;
+        box-shadow: 0 2px 12px rgba(255,94,98,0.08);
+        display: inline-block;
+      }
+      p {
+        font-size: 1.13rem;
+        color: #393e46;
+        line-height: 1.7;
+      }
+      .goal-section {
+        margin-top: 2.5rem;
+        padding: 2.2rem 1.5rem 2.5rem 1.5rem;
+        background: linear-gradient(120deg, #ffe0e9 60%, #f4f6fb 100%);
+        border-radius: 22px;
+        box-shadow: 0 8px 32px rgba(0,195,255,0.09), 0 2px 10px rgba(252,92,125,0.10);
+        position: relative;
+        text-align: center;
+      }
+      .goal-section h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        margin-bottom: 1.2rem;
+        background: linear-gradient(90deg, #00c3ff 0%, #fc5c7d 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 2px 8px rgba(0,195,255,0.08);
+      }
+      .goal-section .goal-highlight {
+        background: linear-gradient(90deg,#ffe259,#ffa751);
+        padding: 0.18em 0.5em;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .goal-section .goal-highlight2 {
+        background: linear-gradient(90deg,#00c3ff,#fc5c7d);
+        padding: 0.18em 0.5em;
+        border-radius: 8px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .goal-section .goal-strong {
+        color: #fc5c7d;
+        font-weight: 700;
+      }
+      .goal-section .goal-watermark {
+        position: absolute;
+        bottom: 18px;
+        right: 28px;
+        font-size: 2.2rem;
+        opacity: 0.13;
+        pointer-events: none;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 14px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 18px rgba(252,92,125,0.13), 0 2px 8px rgba(35,41,70,0.08);
+        display: block;
+        margin-top: 0.7rem;
+        border: 4px solid #00c3ff; /* Add border */
+        padding: 8px; /* Add padding */
+        background: #fff; /* White background for image */
+      }
+      img.chemistry-img {
+        width: 150%;
+        max-width: 700px;
+        height: 410px;
+        display: block;
+        margin: 0 auto 1.5rem auto;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(252,92,125,0.18), 0 2px 8px rgba(35,41,70,0.10);
+      }
+      img.cs-img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        display: block;
+        margin: 0 auto 1.5rem auto;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,195,255,0.18), 0 2px 8px rgba(35,41,70,0.10);
+      }
+      a {
+        color: #00c3ff; /* Change link color */
+        text-decoration: underline;
+        font-weight: bold;
+        transition: color 0.2s;
+      }
+      a:hover {
+        color: #fc5c7d;
+      }
+      ul, ol {
+        margin-left: 1.5em;
+      }
+      ul li, ol li {
+        font-size: 1.1rem;
+        color: #232946;
+        margin-bottom: 0.5em;
+        list-style-type: square; /* Different bullet type */
+      }
+      ul li::marker, ol li::marker {
+        color: #00c3ff; /* Bullet color */
+      }
+      button {
+        background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
+        color: #232946;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1.25rem;
+        font-weight: 800;
+        cursor: pointer;
+        margin: 1.5rem 0 0.5rem 0;
+        box-shadow: 0 6px 32px rgba(0,195,255,0.18), 0 2px 8px rgba(35,41,70,0.10);
+        transition:
+          background 0.25s,
+          color 0.18s,
+          transform 0.18s,
+          box-shadow 0.18s,
+          letter-spacing 0.18s;
+        letter-spacing: 2px;
+        outline: none;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        text-transform: uppercase;
+      }
+      button::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255,255,255,0.18);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.4s, height 0.4s;
+        z-index: 0;
+      }
+      button:hover::before {
+        width: 250%;
+        height: 700%;
+      }
+      button:hover, button:focus {
+        background: linear-gradient(90deg, #ffff1c 0%, #00c3ff 100%);
+        color: #fff;
+        transform: translateY(-4px) scale(1.07) rotate(-1.5deg);
+        box-shadow: 0 12px 40px rgba(0,195,255,0.22), 0 4px 16px rgba(35,41,70,0.12);
+        letter-spacing: 3px;
+      }
+      button:active {
+        transform: scale(0.97);
+        box-shadow: 0 2px 8px rgba(252,92,125,0.12);
+      }
+      button span {
+        position: relative;
+        z-index: 2;
+      }
+      .answer {
+        display: none;
+        margin-top: 1.2rem;
+        padding: 1.2rem;
+        background: linear-gradient(90deg, #ffe0e9 0%, #f7f7fa 100%);
+        border-left: 5px solid #fc5c7d;
+        border-radius: 10px;
+        color: #232946;
+        font-weight: 700;
+        font-size: 1.15rem;
+        box-shadow: 0 2px 8px rgba(252,92,125,0.09);
+        animation: fadeIn 0.7s;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: translateY(0);}
+      }
+    </style>
+    <script>
+      function revealAnswer(btn) {
+        btn.style.display = "none";
+        btn.nextElementSibling.style.display = "block";
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div>My Webpage</div>
+        <ul>
+          <li>Hobbies</li>
+          <li>Subjects</li>
+          <li>Goals</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="container">
+  <h1>Dhruv</h1>
+  <p>
+    Hi, I am a 5"11 sixteen year old studying in grade 11. Welcome to my portfolio where I will show you my hobbies, subjects that I will be studying, and my goals.
+    My favorite website is <a href="https://www.freecodecamp.org/">https://www.freecodecamp.org/</a>
+  </p>
+</div>
+      <div class="container">
+        <h1>Hobbies</h1>
+        <h2>Exercising</h2>
+        <img src="/Assets/Bench.JPEG" alt="Exercising" />
+        <p>
+          I enjoy exercising and I go to the gym regularly. I prefer weight
+          training. My favorite excerise is the bench press which is shown
+          above.
+        </p>
+        <br /><br />
+        <h2>Coding</h2>
+        <p>
+          I am currently learning web development. I have created this webpage
+          using HTML and CSS.
+        </p>
+        <img src="/Assets/coding.JPEG" alt="Coding" />
+        <br /><br />
+        <h2>Reading</h2>
+        <img src="/Assets/Reading.JPEG" alt="Reading" />
+        <p>
+          I currently have read 4 book in past few months. I have been looking
+          forward to read even more books to increase my reading comprehension
+          and the understanding of literature. My favorite book is Rich Dad Poor Dad by Robert Kiyosaki.
+        </p>
+        <br><br><br>
+        <div><h1>Subjects</h1></div>
+        <h2>Mathematics</h2>
+        <p>I enjoy mathematics and I will be studying Adanced Mathematics.</p>
+        <img src="Assets/math.JPEG" alt="Mathematics" />
+        <section>
+          <button onclick="revealAnswer(this)">
+            <span>Reveal the answer</span>
+          </button>
+          <div class="answer">The answer is: 11!</div>
+          <br><br>
+          <h2 class="chemistry">Chemistry</h2>
+          <p>In grade 11, I will choose Chemistry as a subject to study since it is a highly profitable subject. However, chemistry can be a bit tedious considering that we don't use practical examples and study only from our notes. </p>
+          <img src="Assets/chemistry.JPEG" alt="Chemistry" class="chemistry-img" />
+
+          <h2>Geometry</h2>
+          <p>
+            Geometry is a branch of mathematics that deals with shapes, sizes,
+            and the properties of space. It is essential for understanding
+            special relationships and is widely used in various fields such as
+            architecture, engineering, and computer graphics.</p> 
+            <img src="Assets/geometry.JPEG" alt="Geometry" />
+
+          <section class="goal-section">
+            <h1><span style="vertical-align:middle;">🎯</span> Goals <span style="vertical-align:middle;">🚀</span></h1>
+            <p style="font-size:1.22rem; margin-bottom:2rem;">
+              My goal is to become a <span class="goal-highlight">web developer</span>,
+              create amazing websites, and achieve a degree in <span class="goal-highlight2">computer science</span>.<br>
+              I also aim to <span class="goal-strong">improve my coding skills</span> and learn new technologies.
+            </p>
+            <img src="Assets/cs.JPEG" alt="Computer Science" class="cs-img" style="margin-top:0;">
+            <div class="goal-watermark">💡</div>
+          </section>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
